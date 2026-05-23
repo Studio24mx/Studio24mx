@@ -15,7 +15,7 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [projectType, setProjectType] = useState('fullstack');
-  const [budget, setBudget] = useState('$50k - $150k');
+  const [budget, setBudget] = useState('< $10k');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -80,7 +80,7 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
     setName('');
     setEmail('');
     setProjectType('fullstack');
-    setBudget('$50k - $150k');
+    setBudget('< $10k');
     setMessage('');
     setIsSuccess(false);
     onClose();
@@ -132,7 +132,7 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
                 onClick={resetForm}
                 className="w-full sm:w-auto font-sans text-xs uppercase tracking-widest font-bold bg-primary text-on-primary px-8 py-3.5 rounded-full hover:bg-opacity-90 active:scale-95 transition-all duration-300"
               >
-                Volver al Portafolio
+                Volver al Inicio
               </button>
             </div>
           ) : (
