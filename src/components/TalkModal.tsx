@@ -175,7 +175,7 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
               <div>
                 <label className="block font-sans text-xs uppercase tracking-widest text-on-surface-variant mb-3 font-medium">Presupuesto Estimado</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {['< €10k', '€10k - €25k', '€25k - €50k', '€50k+'].map((range) => (
+                  {['< $10k', '$10k - $25k', '$25k - $50k', '$50k+'].map((range) => (
                     <button
                       key={range}
                       type="button"
