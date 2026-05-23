@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, FormEvent } from 'react';
-import { X, Send, CheckCircle2, ChevronRight, MessageSquare, DollarSign, Briefcase } from 'lucide-react';
+import { X, Send, CheckCircle2, MessageSquare, Briefcase } from 'lucide-react';
 
 interface TalkModalProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [projectType, setProjectType] = useState('fullstack');
-  const [budget, setBudget] = useState('$10k - $25k');
+  const [budget, setBudget] = useState('$50k - $150k');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -37,29 +37,50 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!name || !email || !message) return;
 
     setIsSubmitting(true);
-    
-    // Simulate premium server ingestion
-    setTimeout(() => {
+
+    try {
+      // Conexión directa con tu cuenta de Formspree
+      const response = await fetch('https://formspree.io/f/xlgvlpwb', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          Nombre: name,
+          Correo: email,
+          TipoDeProyecto: projectType === 'fullstack' ? 'Ingeniería Full-Stack' : 'Dirección de Arte / UX',
+          Presupuesto: budget,
+          Mensaje: message
+        })
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+        // Cerramos y reseteamos automáticamente tras 3 segundos de éxito
+        setTimeout(() => {
+          resetForm();
+        }, 3000);
+      } else {
+        alert("Hubo un error al enviar el mensaje. Por favor intenta por WhatsApp.");
+      }
+    } catch (error) {
+      console.error("Error en el envío:", error);
+      alert("Error de conexión. Por favor intenta por WhatsApp.");
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-      
-      // Store in local storage for demonstration & auditing
-      const proposal = { name, email, projectType, budget, message, timestamp: new Date().toISOString() };
-      const previous = JSON.parse(localStorage.getItem('studio24_proposals') || '[]');
-      localStorage.setItem('studio24_proposals', JSON.stringify([...previous, proposal]));
-    }, 1200);
+    }
   };
 
   const resetForm = () => {
     setName('');
     setEmail('');
     setProjectType('fullstack');
-    setBudget('€10k - €25k');
+    setBudget('$50k - $150k');
     setMessage('');
     setIsSuccess(false);
     onClose();
@@ -99,13 +120,13 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
         {/* Content Body */}
         <div className="p-6 md:p-8 overflow-y-auto flex-1">
           {isSuccess ? (
-            <div className="py-12 flex flex-col items-center text-center max-w-md mx-auto">
+            <div className="py-12 flex flex-col items-center text-center max-w-md mx-auto animate-in fade-in zoom-in duration-500">
               <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-6 animate-bounce">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <h4 className="font-display font-extrabold text-2xl text-white mb-3">¡Mensaje Recibido!</h4>
               <p className="text-sm text-on-surface-variant mb-8 leading-relaxed">
-                Gracias, <span className="text-white font-medium">{name}</span>. Nuestro equipo de ingeniería y diseño analizará tu solicitud y te contactará en menos de 12 horas hábiles.
+                Gracias, <span className="text-white font-medium">{name}</span>. Nuestro equipo de ingeniería y diseño analizará tu solicitud y te contactará a la brevedad.
               </p>
               <button
                 onClick={resetForm}
@@ -175,7 +196,7 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
               <div>
                 <label className="block font-sans text-xs uppercase tracking-widest text-on-surface-variant mb-3 font-medium">Presupuesto Estimado</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {['< $10k', '$10k - $25k', '$25k - $50k', '$50k+'].map((range) => (
+                  {['< $50k', '$50k - $150k', '$150k - $300k', '$300k+'].map((range) => (
                     <button
                       key={range}
                       type="button"
