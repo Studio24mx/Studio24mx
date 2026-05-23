@@ -11,7 +11,6 @@ import { ServiceItem } from './types';
 import AtmosphericBg from './components/AtmosphericBg';
 import ServiceCard from './components/ServiceCard';
 import TalkModal from './components/TalkModal';
-import { Link } from 'react-router-dom';
 
 export default function App() {
   const [isTalkModalOpen, setIsTalkModalOpen] = useState(false);
@@ -27,13 +26,12 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Enlaces del Menú Estricto (Actualizado con Portafolio)
+  // Enlaces del Menú Estricto
   const navLinks = [
-    { id: 'home', label: 'Inicio', isRoute: false },
-    { id: 'nosotros', label: 'Sobre Nosotros', isRoute: false },
-    { id: 'servicios', label: 'Servicios', isRoute: false },
-    { id: 'portfolio', label: 'Portafolio', isRoute: true, path: '/portfolio' },
-    { id: 'contacto', label: 'Contacto', isRoute: false },
+    { id: 'home', label: 'Inicio' },
+    { id: 'nosotros', label: 'Sobre Nosotros' },
+    { id: 'servicios', label: 'Servicios' },
+    { id: 'contacto', label: 'Contacto' },
   ];
 
   // Base de datos de nuestros 2 servicios exclusivos
@@ -72,15 +70,9 @@ export default function App() {
           {/* Menú PC */}
           <nav className="hidden md:flex items-center space-x-12 text-xs uppercase tracking-widest font-bold text-on-surface-variant">
             {navLinks.map((link) => (
-              link.isRoute ? (
-                <Link key={link.id} to={link.path!} className="hover:text-primary transition-colors duration-300">
-                  {link.label}
-                </Link>
-              ) : (
-                <a key={link.id} href={`#${link.id}`} className="hover:text-primary transition-colors duration-300">
-                  {link.label}
-                </a>
-              )
+              <a key={link.id} href={`#${link.id}`} className="hover:text-primary transition-colors duration-300">
+                {link.label}
+              </a>
             ))}
           </nav>
 
@@ -107,25 +99,14 @@ export default function App() {
         <div className={`fixed inset-0 bg-surface-dim/95 backdrop-blur-3xl z-40 flex flex-col items-center justify-center transition-all duration-500 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
           <div className="flex flex-col items-center space-y-8 text-xl font-display font-bold text-white tracking-tight">
             {navLinks.map((link) => (
-              link.isRoute ? (
-                <Link 
-                  key={link.id} 
-                  to={link.path!} 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a 
-                  key={link.id} 
-                  href={`#${link.id}`} 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              )
+              <a 
+                key={link.id} 
+                href={`#${link.id}`} 
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-primary transition-colors"
+              >
+                {link.label}
+              </a>
             ))}
             <button 
               onClick={() => {
@@ -231,6 +212,7 @@ export default function App() {
       {/* BOTÓN FLOTANTE WHATSAPP (SVG PURO) */}
       <div className="fixed bottom-8 right-8 z-[120]">
         <a 
+          href="https://wa.me/5215555555555?text=Hola%20Studio%2024.%20Me%20interesa%20hablar%20sobre%20un%20proyecto%20de%20alta%20gama." 
           href="https://wa.me/524434819353?text=Hola%20Studio%2024.%20Me%20interesa%20hablar%20sobre%20un%20proyecto%20de%20alta%20gama." 
           target="_blank"
           rel="noopener noreferrer"
