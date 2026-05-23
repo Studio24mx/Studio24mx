@@ -212,7 +212,9 @@ export default function App() {
       {/* BOTÓN FLOTANTE WHATSAPP (SVG PURO) */}
       <div className="fixed bottom-8 right-8 z-[120]">
         <a 
-          href="#" 
+          href="https://wa.me/5215555555555?text=Hola%20Studio%2024.%20Me%20interesa%20hablar%20sobre%20un%20proyecto%20de%20alta%20gama." 
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Contactar por WhatsApp"
           className="relative flex items-center justify-center w-16 h-16 bg-[#25D366] rounded-full hover:bg-[#20ba5a] transition-all duration-300 group shadow-[0_0_30px_rgba(37,211,102,0.3)] hover:scale-110 active:scale-95"
         >
