@@ -192,7 +192,7 @@ export default function App() {
               ¿Tienes un producto digital de alta complejidad entre manos? Iniciemos la estrategia hoy.
             </p>
             <a href="mailto:growth@studio24.com" className="text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-display font-black tracking-tight border-b border-surface-highest pb-2 hover:border-primary transition-all duration-500">
-              growth@studio24.com
+              fabian@studio24mx.com
             </a>
           </div>
         </div>
