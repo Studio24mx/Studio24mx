@@ -45,7 +45,7 @@ export default function TalkModal({ isOpen, onClose }: TalkModalProps) {
 
     try {
       // Conexión directa con tu cuenta de Formspree
-      const response = await fetch('https://formspree.io/f/xlgvlpwb', {
+      const response = await fetch('https://formspree.io/f/xqejopwl', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
